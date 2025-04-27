@@ -67,8 +67,9 @@ using TMPro;
         if (count >= 16)
         {
              // Display the win text.
-
             WinTextObject.SetActive(true);
+            Destroy(GameObject.FindGameObjectWithTag("Enemy"));
+
         }
     }
 
@@ -80,19 +81,6 @@ using TMPro;
 
     // Apply force to the Rigidbody to move the player
         rb.AddForce(movement * speed);
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Enemy"))
-        {
-            // Destroy the current object
-            Destroy(gameObject);
-
-            //set text to "You Lose"
-            WinTextObject.gameObject.SetActive(true);
-           // WinTextObject.text = "You lose!";
-        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -108,6 +96,21 @@ using TMPro;
 
             // updates the text each time the count variable increases 
             SetCountText();
+
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.CompareTag("Enemy"))
+        {
+            //destroy game object
+            Destroy(gameObject);
+
+            //set text to "You Lose"
+            WinTextObject.gameObject.SetActive(true);
+            WinTextObject.GetComponent<TextMeshProUGUI>().text = "You lose!";
+
         }
     }
 
