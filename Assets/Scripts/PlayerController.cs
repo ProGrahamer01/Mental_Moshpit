@@ -82,6 +82,19 @@ using TMPro;
         rb.AddForce(movement * speed);
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            // Destroy the current object
+            Destroy(gameObject);
+
+            //set text to "You Lose"
+            WinTextObject.gameObject.SetActive(true);
+           // WinTextObject.text = "You lose!";
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         // Check if the object the player collided with has the "PickUp" tag
