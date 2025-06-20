@@ -20,6 +20,9 @@ using TMPro;
     // Speed that the player moves at (editble from the inspector) 
     public float speed = 0;
 
+    // Checks how many pickups are in the level
+    private int totalPickups;
+
     // This holds a refrence to the UItext component
     public TextMeshProUGUI countText;
 
@@ -40,6 +43,9 @@ using TMPro;
 
      // Initially set the win text to be inactive. 
         WinTextObject.SetActive(false);
+    // Check how many pick ups are in the level and saves it to the variable 
+        totalPickups = GameObject.FindGameObjectsWithTag("PickUp").Length;
+
 
         
     }
@@ -63,12 +69,12 @@ using TMPro;
         countText.text = "count: " + count.ToString();
 
          // Check if the count has reached or exceeded the win condition.
-        if (count >= 16)
+            //instead of hard picking a number find a way to count the amount of an object  
+        if (count >= totalPickups)
         {
              // Display the win text.
             WinTextObject.SetActive(true);
             Destroy(GameObject.FindGameObjectWithTag("Enemy"));
-
         }
     }
 
