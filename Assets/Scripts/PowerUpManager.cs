@@ -8,6 +8,7 @@ public class PowerUpManager : MonoBehaviour
     [Header("Power-Up Settings")]
     public float freezeDuration = 5f;       // How long enemies stay frozen
     public float enragedSpeedBoost = 2f;    // How much faster enemies move when enraged
+    public float enrageTime;
     //               public float enrageDuration = 10f;      // How long they are enraged for 
 
     private List<EnemyMovementAnimated> enemyList = new List<EnemyMovementAnimated>();
@@ -54,7 +55,7 @@ public class PowerUpManager : MonoBehaviour
         }
 
         // 4) Chain enrage for twice the freeze time
-        float enrageTime = freezeDuration * 2f;
+        enrageTime = freezeDuration * 2f;
         Debug.Log($"[PowerUpManager] Now enraging for {enrageTime:F1}s");
         StartCoroutine(EnrageEnemiesTemporarily());
 
@@ -67,7 +68,7 @@ public class PowerUpManager : MonoBehaviour
             enemy.GetComponent<NavMeshAgent>().speed += enragedSpeedBoost;
         }
 
-        yield return new WaitForSeconds(enrageDuration);
+        yield return new WaitForSeconds(enrageTime);
 
         foreach (var enemy in enemyList)
         {
